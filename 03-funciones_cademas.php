@@ -37,5 +37,5 @@
     
     //Remover espacios en blanco
     echo trim("          Hola         soy   Rodolfo");
-    
+
 ?>
