@@ -42,6 +42,9 @@
             $password = "";
             $email = "";
             $pais = "";
+            $nivel = "";
+            
+            $lenguajes = array();
             
             if(isset($_POST['nombre']))
             {
@@ -49,8 +52,16 @@
                 $password = $_POST['password'];
                 $email = $_POST['email'];
                 $pais = $_POST['pais'];
+               
+                if(isset($_POST['lenguajes']))
+                   $lenguajes = $_POST['lenguajes'];
+                else 
+                   $lenguajes= [];
 
                 $campos = array();
+
+                if(isset($_POST['nivel']))
+                    $nivel = $_POST['nivel'];
 
                 if($nombre == "")
                  array_push($campos,"El campo nombre no puede estar vacio");
@@ -63,6 +74,12 @@
                 
                 if($email == "" || strpos($email, "@") === false)
                    array_push($campos,"El correo electronico no puede estar vacio");
+
+                if($nivel=="")
+                   array_push($campos,"Seleccionada un nivel de desarrollo");
+                
+                if($lenguajes == "" || count($lenguajes) < 2)
+                 array_push($campos,"Selecciona al menos dos lenguajes de programación");
 
                 if(count($campos) > 0)
                 {
@@ -102,6 +119,21 @@
             <option value="ch" <?php echo $pais == 'ch'?  'selected':' '?>>Chile</option>
         </select>
 		</p>
+        <p>
+            Nivel de desarrollo
+            <input type="radio" name="nivel" value="principiante" <?php echo $nivel == 'principiante'?  'checked':' '?>> Principiante
+            <input type="radio" name="nivel" value="intermedio" <?php echo $nivel == 'intermedio'?  'checked':' '?>>Intermedio
+            <input type="radio" name="nivel" value="avanzado" <?php echo $nivel == 'avanzado'?  'checked':' '?>>Avanzado
+        </p>
+
+        <p>
+            Lenguajes de programación <br>
+            <input type="checkbox" name="lenguajes[]" value="PHP" <?php  if(in_array("PHP",$lenguajes)) echo 'checked' ?> >PHP
+            <input type="checkbox" name="lenguajes[]" value="Javascript" <?php  if(in_array("Javascript",$lenguajes)) echo 'checked' ?>>Javascript
+            <input type="checkbox" name="lenguajes[]" value="Java" <?php  if(in_array("Java",$lenguajes)) echo 'checked' ?>>Java
+            <input type="checkbox" name="lenguajes[]" value="Swift" <?php  if(in_array("Swift",$lenguajes)) echo 'checked' ?>>Swift
+            <input type="checkbox" name="lenguajes[]" value="Python" <?php  if(in_array("Python",$lenguajes)) echo 'checked' ?>>Python
+        </p>
 
 		<p><input type="submit" value="enviar datos"></p> 
 	</form>
