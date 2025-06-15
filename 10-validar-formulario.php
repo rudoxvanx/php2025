@@ -38,19 +38,28 @@
 <body>
 	<form action="10-validar-formulario.php" method="POST">
 		<?php
+            $nombre = "";
+            $password = "";
+            $email = "";
+            $pais = "";
+            
             if(isset($_POST['nombre']))
             {
                 $nombre = $_POST['nombre'];
                 $password = $_POST['password'];
                 $email = $_POST['email'];
+                $pais = $_POST['pais'];
 
                 $campos = array();
 
                 if($nombre == "")
-                 array_push($campos,"El campo Nombre no puede estar vacio");
+                 array_push($campos,"El campo nombre no puede estar vacio");
 
-                if($password=="" || strlen($password) < 6)
+                if($password == "" || strlen($password) < 6)
                    array_push($campos,"El campo password no pueede estar vacio, ni tener menos de 6 caracteres");
+
+                if($pais == "")
+                   array_push($campos,"Selecciona un país de origen");
                 
                 if($email == "" || strpos($email, "@") === false)
                    array_push($campos,"El correo electronico no puede estar vacio");
@@ -64,24 +73,34 @@
                     }
                 }else{
                     echo "<div class='correcto'>
-                           Datos correctos";
-                    echo "</div>";      
+                           Datos correctos";     
                 }
+                echo "</div>"; 
             }
 		?>
 		<p>
 		Nombre:<br/>
-		<input type="text" name="nombre">
+		<input type="text" name="nombre" value=<?php echo $nombre?>>
 		</p>
 
 		<p>
 		Password:<br/>
-		<input type="password" name="password">
+		<input type="password" name="password" value=<?php echo $password?>>
 		</p>
 
 		<p>
 		correo electrónico:<br/>
-		<input type="text" name="email">
+		<input type="text" name="email" value=<?php echo $email?>>
+		</p>
+
+        <p>
+		pais:<br/>
+		<select name="pais">
+            <option value="">Selecciona una país</option>
+            <option value="mx" <?php echo $pais == 'mx'?  'selected':' '?>>México</option>
+            <option value="ar" <?php echo $pais == 'ar'?  'selected':' '?>>Argentina</option>
+            <option value="ch" <?php echo $pais == 'ch'?  'selected':' '?>>Chile</option>
+        </select>
 		</p>
 
 		<p><input type="submit" value="enviar datos"></p> 
