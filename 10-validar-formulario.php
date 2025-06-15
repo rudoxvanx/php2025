@@ -62,7 +62,6 @@
                     {
                         echo "<li>{$campos[$i]}</li>";
                     }
-                    echo "</div>";  
                 }else{
                     echo "<div class='correcto'>
                            Datos correctos";
